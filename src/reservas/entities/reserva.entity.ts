@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Type } from 'class-transformer';
 import { Salida } from "src/salidas/entities/salida.entity";
 import { Turista } from "src/turistas/entities/turista.entity";
+import { BlobOptions } from "buffer";
 
 @Entity('reservas')
 export class Reserva {
@@ -21,6 +22,12 @@ export class Reserva {
         default: 1
     })
     lugaresReservados: number;
+
+    @Column({
+        type: 'boolean',
+        default: false
+    })
+    usada: boolean;
 
     @ManyToOne(
         () => Salida,

@@ -23,6 +23,20 @@ export class Salida {
     })
     lugaresDisponibles: number;
 
+    @Column({
+        type: 'int',
+        default: 0,
+        nullable: false
+    })
+    lugaresReservados: number;
+
+
+    @Column({
+        type: 'int',
+        default: 0,
+        nullable: false
+    })
+    lugaresCheckInReady: number;
 
 
     @ManyToOne(

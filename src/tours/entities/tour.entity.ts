@@ -1,6 +1,6 @@
 import { Ciudad } from "src/ciudades/entities/ciudad.entity";
 import { Salida } from "src/salidas/entities/salida.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('tours')
 export class Tour {
@@ -44,4 +44,10 @@ export class Tour {
         {cascade: true}
     )
     salidas: Salida[];
+
+    @Column({
+        type: 'varchar',
+        nullable: true
+    })
+    portadaPath: string;
 }
