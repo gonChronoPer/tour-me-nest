@@ -35,6 +35,10 @@ export class Guia {
     })
     direccion: string;
 
+    @Column({
+        type: 'varchar'
+    })
+    telefono: string;
 
     @OneToMany(
         () => Salida,

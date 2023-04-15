@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCiudadeDto } from './dto/create-ciudade.dto';
-import { UpdateCiudadeDto } from './dto/update-ciudade.dto';
+import { CreateCiudadeDto } from './dto/create-ciudad.dto';
+import { UpdateCiudadeDto } from './dto/update-ciudad.dto';
 
 @Injectable()
 export class CiudadesService {

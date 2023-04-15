@@ -20,7 +20,8 @@ export class Ciudad {
     @ManyToOne(
         () => Pais,
         ( pais ) => pais.ciudades,
-        { onDelete: 'CASCADE'}
+        { onDelete: 'CASCADE'},
+        
     )
     pais: Pais
 

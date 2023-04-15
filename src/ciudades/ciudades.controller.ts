@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CiudadesService } from './ciudades.service';
-import { CreateCiudadeDto } from './dto/create-ciudade.dto';
-import { UpdateCiudadeDto } from './dto/update-ciudade.dto';
+import { CreateCiudadeDto } from './dto/create-ciudad.dto';
+import { UpdateCiudadeDto } from './dto/update-ciudad.dto';
 
 @Controller('ciudades')
 export class CiudadesController {
