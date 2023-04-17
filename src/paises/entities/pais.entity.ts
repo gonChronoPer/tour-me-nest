@@ -7,7 +7,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 export class Pais {
 
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column({
         type: 'varchar',

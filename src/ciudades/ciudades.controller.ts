@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { CiudadesService } from './ciudades.service';
 import { CreateCiudadeDto } from './dto/create-ciudad.dto';
 import { UpdateCiudadeDto } from './dto/update-ciudad.dto';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @Controller('ciudades')
 export class CiudadesController {
@@ -13,22 +14,22 @@ export class CiudadesController {
   }
 
   @Get()
-  findAll() {
-    return this.ciudadesService.findAll();
+  findAll( @Query() paginationDto:PaginationDto ) {
+    return this.ciudadesService.findAll(paginationDto);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.ciudadesService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.ciudadesService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCiudadeDto: UpdateCiudadeDto) {
-    return this.ciudadesService.update(+id, updateCiudadeDto);
+  update(@Param('id') id: number, @Body() updateCiudadeDto: UpdateCiudadeDto) {
+    return this.ciudadesService.update(id, updateCiudadeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.ciudadesService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.ciudadesService.remove(id);
   }
 }

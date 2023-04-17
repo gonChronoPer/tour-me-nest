@@ -41,7 +41,7 @@ export class IdiomasService {
     return idiomas;
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     const idioma = await this.idiomaRepository.findOneBy({ id });
 
     if ( !idioma ) 
@@ -50,7 +50,7 @@ export class IdiomasService {
     return idioma;
   }
 
-  async update(id: string, updateIdiomaDto: UpdateIdiomaDto) {
+  async update(id: number, updateIdiomaDto: UpdateIdiomaDto) {
     try {
       await this.idiomaRepository.update(id = id, updateIdiomaDto );
       return await this.findOne( id );
@@ -60,8 +60,8 @@ export class IdiomasService {
     }
   }
 
-  async remove(id: string) {
-    const idioma = await this.findOne( id );
+  async remove(id: number) {
+    const idioma = await this.findOne(id);
     await this.idiomaRepository.remove( idioma );
 
     if ( idioma ) 

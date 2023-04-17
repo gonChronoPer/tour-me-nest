@@ -8,7 +8,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "ty
 export class Ciudad {
 
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column({
         type: 'varchar',
@@ -20,7 +20,8 @@ export class Ciudad {
     @ManyToOne(
         () => Pais,
         ( pais ) => pais.ciudades,
-        { onDelete: 'CASCADE'},
+        { onDelete: 'CASCADE',
+          nullable: false},
         
     )
     pais: Pais

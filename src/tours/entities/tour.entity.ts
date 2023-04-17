@@ -30,6 +30,12 @@ export class Tour {
         nullable: false
     })
     precio: number;
+    
+    @Column({
+        type: 'varchar',
+        nullable: true
+    })
+    portadaPath: string;
 
     @ManyToOne(
         () => Ciudad,
@@ -45,9 +51,5 @@ export class Tour {
     )
     salidas: Salida[];
 
-    @Column({
-        type: 'varchar',
-        nullable: true
-    })
-    portadaPath: string;
+    
 }

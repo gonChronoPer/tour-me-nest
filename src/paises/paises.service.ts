@@ -41,7 +41,7 @@ export class PaisesService {
     return paises;
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     const pais = await this.paisRepository.findOneBy({ id });
 
     if ( !pais ) 
@@ -50,18 +50,18 @@ export class PaisesService {
     return pais;
   }
 
-  async update(id: string, updatePaisDto: UpdatePaisDto) {
+  async update(id: number, updatePaisDto: UpdatePaisDto) {
     try {
       await this.paisRepository.update(id = id, updatePaisDto );
-      return await this.findOne( id );
+      return await this.findOne(id);
       
     } catch (error) {
       this.handleDBExceptions(error);
     }
   }
 
-  async remove(id: string) {
-    const pais = await this.findOne( id );
+  async remove(id: number) {
+    const pais = await this.findOne(id);
     await this.paisRepository.remove( pais );
 
     if ( pais ) 
