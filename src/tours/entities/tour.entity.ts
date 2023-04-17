@@ -10,17 +10,20 @@ export class Tour {
 
     @Column({
         type: 'varchar',
+        unique: true,
         nullable: false
     })
     nombre: string;
 
     @Column({
-        type: 'varchar'
+        type: 'varchar',
+        nullable: true
     })
     descripcion: string;
     
     @Column({
-        type: 'varchar'
+        type: 'varchar',
+        nullable: false
     })
     puntoEncuentro: string;
 
@@ -40,6 +43,7 @@ export class Tour {
     @ManyToOne(
         () => Ciudad,
         ( ciudad ) => ciudad.tours,
+        {nullable: false}
     )
     ciudad: Ciudad;
 

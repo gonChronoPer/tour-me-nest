@@ -1,26 +1,76 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { CreateGuiaDto } from './dto/create-guia.dto';
 import { UpdateGuiaDto } from './dto/update-guia.dto';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Guia } from './entities/guia.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class GuiasService {
-  create(createGuiaDto: CreateGuiaDto) {
-    return 'This action adds a new guia';
+  
+  private readonly logger = new Logger('GuiasService');
+
+  constructor(
+    @InjectRepository(Guia)
+    private readonly guiaRepository: Repository<Guia>,
+  ){}
+
+  async create(createGuiaDto: CreateGuiaDto) {
+    try {
+      const { ...detalleGuia  } = createGuiaDto;
+      
+      const guia = this.guiaRepository.create(detalleGuia);
+      await this.guiaRepository.save( guia );
+      
+      return guia;
+
+    } catch (error) {
+      this.handleDBExceptions(error);
+    }
   }
 
-  findAll() {
-    return `This action returns all guias`;
+  async findAll(paginationDto: PaginationDto) {
+    const { limit = 10, offset = 0 } = paginationDto;
+
+    const guias = await this.guiaRepository.find({
+      take: limit,
+      skip: offset
+    });
+
+    return guias;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} guia`;
+  async findOne(id: number) {
+    const guia = await this.guiaRepository.findOneBy({id});
+
+    if ( !guia ) 
+      throw new NotFoundException(`Guia con id ${ id } no encontrada`);
+
+    return guia;
   }
 
-  update(id: number, updateGuiaDto: UpdateGuiaDto) {
-    return `This action updates a #${id} guia`;
+  async update(id: number, updateGuiaDto: UpdateGuiaDto) {
+    await this.guiaRepository.update(id = id, updateGuiaDto);
+    return await this.findOne( id );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} guia`;
+  async remove(id: number) {
+    const guia = await this.findOne(id);
+    await this.guiaRepository.remove( guia );
+
+    if ( guia ) 
+      return {
+        msg: `El/La guia con el id ${id} se ha eliminado correctamente.`
+      };
+  }
+
+  private handleDBExceptions( error: any ) {
+    if ( error.sqlState === '23000' )
+      throw new BadRequestException(error.sqlMessage);
+    
+    this.logger.error(error);
+
+    throw new InternalServerErrorException('Unexpected error, check server logs');
   }
 }

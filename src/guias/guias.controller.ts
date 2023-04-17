@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { GuiasService } from './guias.service';
 import { CreateGuiaDto } from './dto/create-guia.dto';
 import { UpdateGuiaDto } from './dto/update-guia.dto';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @Controller('guias')
 export class GuiasController {
@@ -13,22 +14,22 @@ export class GuiasController {
   }
 
   @Get()
-  findAll() {
-    return this.guiasService.findAll();
+  findAll( @Query() paginationDto:PaginationDto ) {
+    return this.guiasService.findAll(paginationDto);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.guiasService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.guiasService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGuiaDto: UpdateGuiaDto) {
-    return this.guiasService.update(+id, updateGuiaDto);
+  update(@Param('id') id: number, @Body() updateGuiaDto: UpdateGuiaDto) {
+    return this.guiasService.update(id, updateGuiaDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.guiasService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.guiasService.remove(id);
   }
 }

@@ -11,7 +11,7 @@ import { PaginationDto } from 'src/common/dtos/pagination.dto';
 @Injectable()
 export class CiudadesService {
 
-  private readonly logger = new Logger('IdiomasService');
+  private readonly logger = new Logger('CiudadesService');
 
   constructor(
     @InjectRepository(Ciudad)
@@ -24,7 +24,7 @@ export class CiudadesService {
 
   async create(createCiudadeDto: CreateCiudadeDto) {
     try {
-      const { paisId, nombre } = createCiudadeDto;
+      const { paisId, ...ciudadDetails } = createCiudadeDto;
 
       const paisCiudad = await this.paisRepository.findOneBy({ id: paisId});
 
@@ -32,7 +32,7 @@ export class CiudadesService {
         throw new BadRequestException(`No existe ningun pais con el id ${paisId}`);
       
       const ciudad = this.ciudadRepository.create({
-        nombre,
+        ...ciudadDetails,
         pais: paisCiudad
       });
 
@@ -79,11 +79,9 @@ export class CiudadesService {
 
   async update(id: number, updateCiudadeDto: UpdateCiudadeDto) {
 
-    const { paisId, nombre } = updateCiudadeDto;
+    const { paisId, ...ciudadDetails } = updateCiudadeDto;
 
-    const ciudad = await this.ciudadRepository.findOneBy({ id })
-
-    if( !ciudad ) throw new NotFoundException(`No existe una ciudad con el id ${id}`); 
+    const ciudad = await this.findOne( id );
 
     const paisCiudad = await this.paisRepository.findOneBy({ id: paisId});
 
@@ -91,7 +89,7 @@ export class CiudadesService {
       throw new BadRequestException(`No existe ningun pais con el id ${paisId}`);
 
     const dataModificada = {
-      nombre: nombre,
+      ...ciudadDetails,
       pais: paisCiudad
     }
       
@@ -114,7 +112,6 @@ export class CiudadesService {
     if ( error.sqlState === '23000' )
       throw new BadRequestException(error.sqlMessage);
     
-
     this.logger.error(error);
 
     throw new InternalServerErrorException('Unexpected error, check server logs');

@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TuristasService } from './turistas.service';
 import { CreateTuristaDto } from './dto/create-turista.dto';
 import { UpdateTuristaDto } from './dto/update-turista.dto';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @Controller('turistas')
 export class TuristasController {
@@ -13,22 +14,22 @@ export class TuristasController {
   }
 
   @Get()
-  findAll() {
-    return this.turistasService.findAll();
+  findAll( @Query() paginationDto:PaginationDto ) {
+    return this.turistasService.findAll(paginationDto);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.turistasService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.turistasService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTuristaDto: UpdateTuristaDto) {
-    return this.turistasService.update(+id, updateTuristaDto);
+  update(@Param('id') id: number, @Body() updateTuristaDto: UpdateTuristaDto) {
+    return this.turistasService.update(id, updateTuristaDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.turistasService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.turistasService.remove(id);
   }
 }

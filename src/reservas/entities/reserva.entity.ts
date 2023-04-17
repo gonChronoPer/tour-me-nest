@@ -32,6 +32,7 @@ export class Reserva {
     @ManyToOne(
         () => Salida,
         ( salida ) => salida.reservas,
+        {nullable: false}
     )
     salida: Salida
 
@@ -39,6 +40,7 @@ export class Reserva {
     @ManyToOne(
         () => Turista,
         ( turista ) => turista.reservas,
+        {nullable: false}
     )
     turista: Turista
 }
