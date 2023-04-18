@@ -51,7 +51,9 @@ export class ToursService {
       take: limit,
       skip: offset,
       relations: {
-        ciudad: true
+        ciudad: {
+          pais: true
+        }
       }
     });
 
@@ -61,7 +63,10 @@ export class ToursService {
   async findOne(id: number) {
     const tour = await this.tourRepository.findOne({
       where: { id: id },
-      relations: ['ciudad']
+      relations: [
+        'ciudad',
+        'ciudad.pais'
+      ]
     });
 
     if ( !tour ) 
@@ -76,7 +81,6 @@ export class ToursService {
     const tour = await this.findOne(id);
 
     const ciudadTour = await this.ciudadRepository.findOneBy({ id: ciudadId});
-
     if( !ciudadTour )
       throw new BadRequestException(`No existe ninguna ciudad con el id ${ciudadId}`);
 

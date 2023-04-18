@@ -69,7 +69,11 @@ export class SalidasService {
       take: limit,
       skip: offset,
       relations: {
-        tour: true,
+        tour: {
+          ciudad: {
+            pais: true
+          }
+        },
         guia: true,
         idioma: true
       }
@@ -81,7 +85,12 @@ export class SalidasService {
   async findOne(id: number) {
     const salida = await this.salidaRepository.findOne({
       where: { id: id },
-      relations: ['tour', 'guia', 'idioma']
+      relations: [
+        'tour',
+        'tour.ciudad',
+        'tour.ciudad.pais', 
+        'guia', 
+        'idioma']
     });
 
     if ( !salida ) 
@@ -99,13 +108,13 @@ export class SalidasService {
       if( !tourSalida )
         throw new BadRequestException(`No existe ningun tour con el id ${tourId}`);
 
-      const guiaSalida = await this.guiaRepository.findOneBy({ id: guiaId});
-      if( !guiaSalida )
-        throw new BadRequestException(`No existe ningun guia con el id ${guiaId}`);
+    const guiaSalida = await this.guiaRepository.findOneBy({ id: guiaId});
+    if( !guiaSalida )
+      throw new BadRequestException(`No existe ningun guia con el id ${guiaId}`);
 
-      const idiomaSalida = await this.idiomaRepository.findOneBy({ id: idiomaId});
-      if( !idiomaSalida )
-        throw new BadRequestException(`No existe ningun idioma con el id ${idiomaId}`);
+    const idiomaSalida = await this.idiomaRepository.findOneBy({ id: idiomaId});
+    if( !idiomaSalida )
+      throw new BadRequestException(`No existe ningun idioma con el id ${idiomaId}`);
 
     const dataModificada = {
       ...salidaDetails,

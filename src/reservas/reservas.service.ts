@@ -36,7 +36,6 @@ export class ReservasService {
       if( !turistaReserva )
         throw new BadRequestException(`No existe ningun turista con el id ${turistaId}`);
       
-      console.log(salidaReserva.fechaHora);
 
       const reserva = this.reservaRepository.create({
         ...reservaDetails,
@@ -44,12 +43,22 @@ export class ReservasService {
         turista: turistaReserva
       });
 
-      reserva.codigo = Math.floor(Math.random() * 999999);
+      reserva.codigo = Math.floor(Math.random() * 99999999);
       
-      await this.salidaRepository.save( reserva );
+      if( reserva.salida.lugaresDisponibles <= 0 )
+        throw new BadRequestException(`No hay mas lugares disponibles en el tour`);
 
-      return reserva;
+      if( reserva.salida.lugaresDisponibles < reservaDetails.lugaresReservados )
+        throw new BadRequestException(`Esta queriendo reservar mas lugares de los disponibles`);
       
+      reserva.salida.lugaresDisponibles -= reservaDetails.lugaresReservados;
+      reserva.salida.lugaresReservados += reservaDetails.lugaresReservados;
+      await this.salidaRepository.update(reserva.salida.id, reserva.salida)
+      
+      await this.reservaRepository.save( reserva );
+      
+      return await this.findOne(reserva.id);;
+  
     } catch (error) {
       this.handleDBExceptions(error);
     }
@@ -62,9 +71,17 @@ export class ReservasService {
       take: limit,
       skip: offset,
       relations: {
-        salida: true,
+        salida: {
+          tour: {
+            ciudad: {
+              pais: true
+            }
+          },
+          guia: true,
+          idioma: true
+        },
         turista: true
-      }
+      },
     });
 
     return reservas;
@@ -73,7 +90,14 @@ export class ReservasService {
   async findOne(id: number) {
     const reserva = await this.reservaRepository.findOne({
       where: { id: id },
-      relations: ['salida', 'turista']
+      relations: [
+        'salida', 
+        'salida.tour', 
+        'salida.tour.ciudad',
+        'salida.tour.ciudad.pais', 
+        'salida.guia',
+        'salida.idioma',  
+        'turista']
     });
 
     if ( !reserva ) 
@@ -83,6 +107,8 @@ export class ReservasService {
   }
 
   update(id: number, updateReservaDto: UpdateReservaDto) {
+
+    // No hace falta hacerlo, porque no se puede modificar una reserva
     return `This action updates a #${id} reserva`;
   }
 
