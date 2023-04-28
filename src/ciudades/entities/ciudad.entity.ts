@@ -1,6 +1,6 @@
 import { Pais } from "src/paises/entities/pais.entity";
 import { Tour } from "src/tours/entities/tour.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({
     name: 'ciudades'
@@ -26,12 +26,20 @@ export class Ciudad {
     )
     pais: Pais
 
-
-
     @OneToMany(
         () => Tour,
         ( ciudadTours ) => ciudadTours.ciudad,
         {cascade: true}
     )
     tours?: Tour[]
+
+    @CreateDateColumn()
+    created!: Date;
+  
+    @UpdateDateColumn()
+    updated!: Date;
+  
+    // Add this column to your entity!
+    @DeleteDateColumn()
+    deletedAt?: Date;
 }

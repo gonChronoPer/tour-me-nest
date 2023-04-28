@@ -3,6 +3,7 @@ import { ReservasService } from './reservas.service';
 import { CreateReservaDto } from './dto/create-reserva.dto';
 import { UpdateReservaDto } from './dto/update-reserva.dto';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { CheckinReservaDto } from './dto/checkin-reserva.dto';
 
 @Controller('reservas')
 export class ReservasController {
@@ -26,6 +27,11 @@ export class ReservasController {
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateReservaDto: UpdateReservaDto) {
     return this.reservasService.update(id, updateReservaDto);
+  }
+
+  @Patch('checkin/:id')
+  checkin(@Param('codigo') codigo: number) {
+    return this.reservasService.checkin(codigo);
   }
 
   @Delete(':id')

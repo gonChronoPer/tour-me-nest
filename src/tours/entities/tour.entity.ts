@@ -1,6 +1,6 @@
 import { Ciudad } from "src/ciudades/entities/ciudad.entity";
 import { Salida } from "src/salidas/entities/salida.entity";
-import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('tours')
 export class Tour {
@@ -47,7 +47,6 @@ export class Tour {
     )
     ciudad: Ciudad;
 
-
     @OneToMany(
         () => Salida,
         ( tourSalidas ) => tourSalidas.tour,
@@ -55,5 +54,13 @@ export class Tour {
     )
     salidas: Salida[];
 
-    
+    @CreateDateColumn()
+    created!: Date;
+  
+    @UpdateDateColumn()
+    updated!: Date;
+  
+    // Add this column to your entity!
+    @DeleteDateColumn()
+    deletedAt?: Date;
 }

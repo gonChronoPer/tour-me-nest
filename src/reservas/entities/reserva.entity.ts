@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Type } from 'class-transformer';
 import { Salida } from "src/salidas/entities/salida.entity";
 import { Turista } from "src/turistas/entities/turista.entity";
@@ -43,4 +43,14 @@ export class Reserva {
         {nullable: false}
     )
     turista: Turista
+
+    @CreateDateColumn()
+    created!: Date;
+  
+    @UpdateDateColumn()
+    updated!: Date;
+  
+    // Add this column to your entity!
+    @DeleteDateColumn()
+    deletedAt?: Date;
 }

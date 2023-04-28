@@ -90,7 +90,8 @@ export class SalidasService {
         'tour.ciudad',
         'tour.ciudad.pais', 
         'guia', 
-        'idioma']
+        'idioma'
+      ]
     });
 
     if ( !salida ) 

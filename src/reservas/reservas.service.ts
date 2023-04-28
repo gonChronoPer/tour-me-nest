@@ -7,6 +7,8 @@ import { Repository } from 'typeorm';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { Salida } from 'src/salidas/entities/salida.entity';
 import { Turista } from 'src/turistas/entities/turista.entity';
+import { CheckinReservaDto } from './dto/checkin-reserva.dto';
+import { Cipher } from 'crypto';
 
 @Injectable()
 export class ReservasService {
@@ -122,6 +124,39 @@ export class ReservasService {
       };
   }
 
+  // TODO
+  async checkin(codigo: number) {
+    try {      
+      const reserva = await this.reservaRepository.findOne({
+        where: {
+            codigo: codigo,
+        },
+        relations: [
+          'turista',
+          'salida',
+        ],
+      })
+
+      if( reserva.usada )
+        throw new BadRequestException(`Ya se realizó el checkin de esta reserva.`)
+      
+      console.log(reserva);
+      reserva.salida.lugaresCheckInReady += reserva.lugaresReservados;
+      
+      await this.salidaRepository.update(reserva.salida.id, reserva.salida)
+      
+      reserva.usada = true;
+      await this.reservaRepository.update( reserva.id, reserva );
+      
+      return {
+        reserva: await this.findOne(reserva.id),
+        salida: await this.salidaRepository.findOneBy({id: reserva.salida.id})
+      };
+  
+    } catch (error) {
+      this.handleDBExceptions(error);
+    }
+  }
   
   private handleDBExceptions( error: any ) {
     if ( error.sqlState === '23000' )

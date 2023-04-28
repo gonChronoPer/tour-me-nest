@@ -1,5 +1,5 @@
 import { Salida } from "src/salidas/entities/salida.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('guias')
 export class Guia {
@@ -46,5 +46,15 @@ export class Guia {
         {cascade: true}
     )
     salidas: Salida[];
+
+    @CreateDateColumn()
+    created!: Date;
+  
+    @UpdateDateColumn()
+    updated!: Date;
+  
+    // Add this column to your entity!
+    @DeleteDateColumn()
+    deletedAt?: Date;
 
 }

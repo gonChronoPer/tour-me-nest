@@ -1,6 +1,6 @@
 import { IsEmail } from "class-validator";
 import { Reserva } from "src/reservas/entities/reserva.entity";
-import { Column, Entity, Long, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, Long, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('turistas')
 export class Turista {
@@ -35,4 +35,14 @@ export class Turista {
         {cascade: true}
     )
     reservas?: Reserva[]
+
+    @CreateDateColumn()
+    created!: Date;
+  
+    @UpdateDateColumn()
+    updated!: Date;
+  
+    // Add this column to your entity!
+    @DeleteDateColumn()
+    deletedAt?: Date;
 }

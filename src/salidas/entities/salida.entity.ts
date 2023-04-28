@@ -2,7 +2,7 @@ import { Guia } from "src/guias/entities/guia.entity";
 import { Idioma } from "src/idiomas/entities/idioma.entity";
 import { Reserva } from "src/reservas/entities/reserva.entity";
 import { Tour } from "src/tours/entities/tour.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('salidas')
 export class Salida {
@@ -69,4 +69,14 @@ export class Salida {
         {cascade: true}
     )
     reservas?: Reserva[]
+
+    @CreateDateColumn()
+    created!: Date;
+  
+    @UpdateDateColumn()
+    updated!: Date;
+  
+    // Add this column to your entity!
+    @DeleteDateColumn()
+    deletedAt?: Date;
 }
