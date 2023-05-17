@@ -15,6 +15,12 @@ export class Turista {
     email: string;
 
     @Column({
+        type: 'varchar',
+        select: false
+    })
+    password: string;
+    
+    @Column({
         type: 'varchar'
     })
     nombre: string;
