@@ -88,6 +88,20 @@ let SalidasService = class SalidasService {
             throw new common_1.NotFoundException(`No se encontraron salidas para el guia con id ${id}`);
         return salidas;
     }
+    async findAllByTour(id) {
+        const salidas = await this.salidaRepository.find({
+            where: { tour: { id: id } },
+            relations: [
+                'tour',
+                'tour.ciudad',
+                'guia',
+                'idioma'
+            ]
+        });
+        if (!salidas || salidas.length === 0)
+            throw new common_1.NotFoundException(`No se encontraron salidas para el tour con id ${id}`);
+        return salidas;
+    }
     async findOne(id) {
         const salida = await this.salidaRepository.findOne({
             where: { id: id },

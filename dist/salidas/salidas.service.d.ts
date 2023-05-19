@@ -16,6 +16,7 @@ export declare class SalidasService {
     create(createSalidaDto: CreateSalidaDto): Promise<Salida>;
     findAll(paginationDto: PaginationDto): Promise<Salida[]>;
     findAllByGuia(id: number): Promise<Salida[]>;
+    findAllByTour(id: number): Promise<Salida[]>;
     findOne(id: number): Promise<Salida>;
     update(id: number, updateSalidaDto: UpdateSalidaDto): Promise<Salida>;
     remove(id: number): Promise<{

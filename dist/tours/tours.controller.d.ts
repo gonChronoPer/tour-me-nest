@@ -7,7 +7,7 @@ export declare class ToursController {
     constructor(toursService: ToursService);
     create(createTourDto: CreateTourDto): Promise<import("./entities/tour.entity").Tour>;
     findAll(paginationDto: PaginationDto): Promise<import("./entities/tour.entity").Tour[]>;
-    findAllByGuia(id: number): Promise<import("./entities/tour.entity").Tour[]>;
+    findAllByCiudad(id: number): Promise<import("./entities/tour.entity").Tour[]>;
     findOne(id: number): Promise<import("./entities/tour.entity").Tour>;
     update(id: number, updateTourDto: UpdateTourDto): Promise<import("./entities/tour.entity").Tour>;
     remove(id: number): Promise<{

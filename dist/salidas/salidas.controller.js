@@ -31,6 +31,9 @@ let SalidasController = class SalidasController {
     findAllByGuia(id) {
         return this.salidasService.findAllByGuia(id);
     }
+    findAllByTour(id) {
+        return this.salidasService.findAllByTour(id);
+    }
     findOne(id) {
         return this.salidasService.findOne(id);
     }
@@ -62,6 +65,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], SalidasController.prototype, "findAllByGuia", null);
+__decorate([
+    (0, common_1.Get)('/tous/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], SalidasController.prototype, "findAllByTour", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

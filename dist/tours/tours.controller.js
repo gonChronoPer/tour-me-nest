@@ -28,7 +28,7 @@ let ToursController = class ToursController {
     findAll(paginationDto) {
         return this.toursService.findAll(paginationDto);
     }
-    findAllByGuia(id) {
+    findAllByCiudad(id) {
         return this.toursService.findAllByCiudad(id);
     }
     findOne(id) {
@@ -61,7 +61,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
-], ToursController.prototype, "findAllByGuia", null);
+], ToursController.prototype, "findAllByCiudad", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
