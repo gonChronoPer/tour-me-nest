@@ -23,7 +23,7 @@ export class SalidasController {
     return this.salidasService.findAllByGuia(id);
   }
 
-  @Get('/tous/:id')
+  @Get('/tour/:id')
   findAllByTour(@Param('id') id: number) {
     return this.salidasService.findAllByTour(id);
   }
