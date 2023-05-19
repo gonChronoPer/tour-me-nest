@@ -84,7 +84,7 @@ let ReservasService = class ReservasService {
         return reservas;
     }
     async findAllByTurista(id) {
-        const salida = await this.reservaRepository.find({
+        const reservas = await this.reservaRepository.find({
             where: { turista: { id: id } },
             relations: [
                 'salida',
@@ -96,9 +96,9 @@ let ReservasService = class ReservasService {
                 'turista'
             ]
         });
-        if (!salida)
-            throw new common_1.NotFoundException(`No se encontraron salidad para el guia con id ${id}`);
-        return salida;
+        if (!reservas || reservas.length === 0)
+            throw new common_1.NotFoundException(`No se encontraron reservas para el turista con id ${id}`);
+        return reservas;
     }
     async findOne(id) {
         const reserva = await this.reservaRepository.findOne({

@@ -90,7 +90,7 @@ export class ReservasService {
   }
 
   async findAllByTurista(id: number) {
-    const salida = await this.reservaRepository.find({
+    const reservas = await this.reservaRepository.find({
       where: { turista: { id: id} },
       relations: [
         'salida', 
@@ -103,10 +103,10 @@ export class ReservasService {
       ]
     });
     
-    if ( !salida ) 
-        throw new NotFoundException(`No se encontraron salidad para el guia con id ${ id }`);
+    if ( !reservas || reservas.length === 0 ) 
+        throw new NotFoundException(`No se encontraron reservas para el turista con id ${ id }`);
 
-      return salida;
+      return reservas;
   }
 
   async findOne(id: number) {

@@ -77,7 +77,7 @@ let SalidasService = class SalidasService {
         return salidas;
     }
     async findAllByGuia(id) {
-        const salida = await this.salidaRepository.find({
+        const salidas = await this.salidaRepository.find({
             where: { guia: { id: id } },
             relations: [
                 'tour',
@@ -87,9 +87,9 @@ let SalidasService = class SalidasService {
                 'idioma'
             ]
         });
-        if (!salida)
-            throw new common_1.NotFoundException(`No se encontraron salidad para el guia con id ${id}`);
-        return salida;
+        if (!salidas || salidas.length === 0)
+            throw new common_1.NotFoundException(`No se encontraron salidas para el guia con id ${id}`);
+        return salidas;
     }
     async findOne(id) {
         const salida = await this.salidaRepository.findOne({
