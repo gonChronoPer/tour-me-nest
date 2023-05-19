@@ -23,6 +23,11 @@ export class SalidasController {
     return this.salidasService.findOne(id);
   }
 
+  @Get('/guia/:id')
+  findOneByGuia(@Param('id') id: number) {
+    return this.salidasService.findOneByGuia(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateSalidaDto: UpdateSalidaDto) {
     return this.salidasService.update(id, updateSalidaDto);
