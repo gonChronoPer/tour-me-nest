@@ -19,6 +19,11 @@ export class ReservasController {
     return this.reservasService.findAll(paginationDto);
   }
 
+  @Get('/turista/:id')
+  findAllByTurista(@Param('id') id: number) {
+    return this.reservasService.findAllByTurista(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.reservasService.findOne(id);

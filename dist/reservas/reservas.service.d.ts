@@ -13,6 +13,7 @@ export declare class ReservasService {
     constructor(reservaRepository: Repository<Reserva>, salidaRepository: Repository<Salida>, turistaRepository: Repository<Turista>);
     create(createReservaDto: CreateReservaDto): Promise<Reserva>;
     findAll(paginationDto: PaginationDto): Promise<Reserva[]>;
+    findAllByTurista(id: number): Promise<Reserva[]>;
     findOne(id: number): Promise<Reserva>;
     update(id: number, updateReservaDto: UpdateReservaDto): string;
     remove(id: number): Promise<{

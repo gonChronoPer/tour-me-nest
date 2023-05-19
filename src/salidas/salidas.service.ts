@@ -83,6 +83,24 @@ export class SalidasService {
     return salidas;
   }
 
+  async findAllByGuia(id: number) {
+    const salida = await this.salidaRepository.find({
+      where: { guia: { id: id} },
+      relations: [
+        'tour',
+        'tour.ciudad',
+        'tour.ciudad.pais', 
+        'guia', 
+        'idioma'
+      ]
+    });
+    
+    if ( !salida ) 
+        throw new NotFoundException(`No se encontraron salidad para el guia con id ${ id }`);
+
+      return salida;
+  }
+
   async findOne(id: number) {
     const salida = await this.salidaRepository.findOne({
       where: { id: id },
@@ -99,26 +117,6 @@ export class SalidasService {
       throw new NotFoundException(`Salida con id ${ id } no encontrado`);
 
     return salida;
-  }
-
-
-  async findOneByGuia(id: number) {
-    
-    const salida = await this.salidaRepository.find({
-      where: { guia: { id: id} },
-      relations: [
-        'tour',
-        'tour.ciudad',
-        'tour.ciudad.pais', 
-        'guia', 
-        'idioma'
-      ]
-    });
-    
-    if ( !salida ) 
-        throw new NotFoundException(`No se encontraron salidad para el guia con id ${ id }`);
-
-      return salida;
   }
 
   async update(id: number, updateSalidaDto: UpdateSalidaDto) {

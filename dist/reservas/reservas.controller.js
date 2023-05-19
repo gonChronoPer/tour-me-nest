@@ -28,6 +28,9 @@ let ReservasController = class ReservasController {
     findAll(paginationDto) {
         return this.reservasService.findAll(paginationDto);
     }
+    findAllByTurista(id) {
+        return this.reservasService.findAllByTurista(id);
+    }
     findOne(id) {
         return this.reservasService.findOne(id);
     }
@@ -55,6 +58,13 @@ __decorate([
     __metadata("design:paramtypes", [pagination_dto_1.PaginationDto]),
     __metadata("design:returntype", void 0)
 ], ReservasController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('/turista/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], ReservasController.prototype, "findAllByTurista", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

@@ -83,6 +83,23 @@ let ReservasService = class ReservasService {
         });
         return reservas;
     }
+    async findAllByTurista(id) {
+        const salida = await this.reservaRepository.find({
+            where: { turista: { id: id } },
+            relations: [
+                'salida',
+                'salida.tour',
+                'salida.tour.ciudad',
+                'salida.tour.ciudad.pais',
+                'salida.guia',
+                'salida.idioma',
+                'turista'
+            ]
+        });
+        if (!salida)
+            throw new common_1.NotFoundException(`No se encontraron salidad para el guia con id ${id}`);
+        return salida;
+    }
     async findOne(id) {
         const reserva = await this.reservaRepository.findOne({
             where: { id: id },

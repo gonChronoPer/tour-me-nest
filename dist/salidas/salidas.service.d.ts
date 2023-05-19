@@ -15,8 +15,8 @@ export declare class SalidasService {
     constructor(salidaRepository: Repository<Salida>, tourRepository: Repository<Tour>, guiaRepository: Repository<Guia>, idiomaRepository: Repository<Idioma>);
     create(createSalidaDto: CreateSalidaDto): Promise<Salida>;
     findAll(paginationDto: PaginationDto): Promise<Salida[]>;
+    findAllByGuia(id: number): Promise<Salida[]>;
     findOne(id: number): Promise<Salida>;
-    findOneByGuia(id: number): Promise<Salida[]>;
     update(id: number, updateSalidaDto: UpdateSalidaDto): Promise<Salida>;
     remove(id: number): Promise<{
         msg: string;

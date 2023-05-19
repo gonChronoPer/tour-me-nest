@@ -28,11 +28,11 @@ let SalidasController = class SalidasController {
     findAll(paginationDto) {
         return this.salidasService.findAll(paginationDto);
     }
+    findAllByGuia(id) {
+        return this.salidasService.findAllByGuia(id);
+    }
     findOne(id) {
         return this.salidasService.findOne(id);
-    }
-    findOneByGuia(id) {
-        return this.salidasService.findOneByGuia(id);
     }
     update(id, updateSalidaDto) {
         return this.salidasService.update(id, updateSalidaDto);
@@ -56,19 +56,19 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], SalidasController.prototype, "findAll", null);
 __decorate([
+    (0, common_1.Get)('/guia/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], SalidasController.prototype, "findAllByGuia", null);
+__decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], SalidasController.prototype, "findOne", null);
-__decorate([
-    (0, common_1.Get)('/guia/:id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], SalidasController.prototype, "findOneByGuia", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),

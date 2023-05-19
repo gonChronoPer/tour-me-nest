@@ -7,6 +7,7 @@ export declare class ReservasController {
     constructor(reservasService: ReservasService);
     create(createReservaDto: CreateReservaDto): Promise<import("./entities/reserva.entity").Reserva>;
     findAll(paginationDto: PaginationDto): Promise<import("./entities/reserva.entity").Reserva[]>;
+    findAllByTurista(id: number): Promise<import("./entities/reserva.entity").Reserva[]>;
     findOne(id: number): Promise<import("./entities/reserva.entity").Reserva>;
     update(id: number, updateReservaDto: UpdateReservaDto): string;
     checkin(codigo: number): Promise<{

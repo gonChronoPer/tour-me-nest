@@ -18,14 +18,14 @@ export class SalidasController {
     return this.salidasService.findAll(paginationDto);
   }
 
+  @Get('/guia/:id')
+  findAllByGuia(@Param('id') id: number) {
+    return this.salidasService.findAllByGuia(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.salidasService.findOne(id);
-  }
-
-  @Get('/guia/:id')
-  findOneByGuia(@Param('id') id: number) {
-    return this.salidasService.findOneByGuia(id);
   }
 
   @Patch(':id')
