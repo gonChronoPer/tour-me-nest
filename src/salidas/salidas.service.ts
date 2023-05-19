@@ -71,9 +71,7 @@ export class SalidasService {
       skip: offset,
       relations: {
         tour: {
-          ciudad: {
-            pais: true
-          }
+          ciudad: true
         },
         guia: true,
         idioma: true
@@ -88,8 +86,7 @@ export class SalidasService {
       where: { guia: { id: id} },
       relations: [
         'tour',
-        'tour.ciudad',
-        'tour.ciudad.pais', 
+        'tour.ciudad', 
         'guia', 
         'idioma'
       ]
@@ -107,7 +104,6 @@ export class SalidasService {
       relations: [
         'tour',
         'tour.ciudad',
-        'tour.ciudad.pais', 
         'guia', 
         'idioma'
       ]

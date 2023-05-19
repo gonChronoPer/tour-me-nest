@@ -1,4 +1,3 @@
-import { Pais } from "src/paises/entities/pais.entity";
 import { Tour } from "src/tours/entities/tour.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -17,14 +16,11 @@ export class Ciudad {
     })
     nombre: string
 
-    @ManyToOne(
-        () => Pais,
-        ( pais ) => pais.ciudades,
-        { onDelete: 'CASCADE',
-          nullable: false},
-        
-    )
-    pais: Pais
+    @Column({
+        type: 'varchar',
+        nullable: false
+    })
+    portadaPath: string;
 
     @OneToMany(
         () => Tour,

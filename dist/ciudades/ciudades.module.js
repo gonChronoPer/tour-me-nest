@@ -12,7 +12,6 @@ const ciudades_service_1 = require("./ciudades.service");
 const ciudades_controller_1 = require("./ciudades.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const ciudad_entity_1 = require("./entities/ciudad.entity");
-const pais_entity_1 = require("../paises/entities/pais.entity");
 let CiudadesModule = class CiudadesModule {
 };
 CiudadesModule = __decorate([
@@ -20,7 +19,7 @@ CiudadesModule = __decorate([
         controllers: [ciudades_controller_1.CiudadesController],
         providers: [ciudades_service_1.CiudadesService],
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([ciudad_entity_1.Ciudad, pais_entity_1.Pais])
+            typeorm_1.TypeOrmModule.forFeature([ciudad_entity_1.Ciudad])
         ],
         exports: [
             ciudades_service_1.CiudadesService,

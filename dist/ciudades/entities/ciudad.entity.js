@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ciudad = void 0;
-const pais_entity_1 = require("../../paises/entities/pais.entity");
 const tour_entity_1 = require("../../tours/entities/tour.entity");
 const typeorm_1 = require("typeorm");
 let Ciudad = class Ciudad {
@@ -28,10 +27,12 @@ __decorate([
     __metadata("design:type", String)
 ], Ciudad.prototype, "nombre", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => pais_entity_1.Pais, (pais) => pais.ciudades, { onDelete: 'CASCADE',
-        nullable: false }),
-    __metadata("design:type", pais_entity_1.Pais)
-], Ciudad.prototype, "pais", void 0);
+    (0, typeorm_1.Column)({
+        type: 'varchar',
+        nullable: false
+    }),
+    __metadata("design:type", String)
+], Ciudad.prototype, "portadaPath", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => tour_entity_1.Tour, (ciudadTours) => ciudadTours.ciudad, { cascade: true }),
     __metadata("design:type", Array)

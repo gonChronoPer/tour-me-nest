@@ -8,4 +8,8 @@ export class CreateCiudadeDto {
     @IsNumber()
     @IsPositive()
     paisId: number;
+
+    @IsString()
+    @MinLength(1)
+    portadaPath: string;
 }

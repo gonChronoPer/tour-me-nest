@@ -4,7 +4,6 @@ import { UpdateCiudadeDto } from './dto/update-ciudad.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Ciudad } from './entities/ciudad.entity';
 import { Repository } from 'typeorm';
-import { Pais } from 'src/paises/entities/pais.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 
@@ -16,25 +15,14 @@ export class CiudadesService {
   constructor(
     @InjectRepository(Ciudad)
     private readonly ciudadRepository: Repository<Ciudad>,
-    
-    @InjectRepository(Pais)
-    private readonly paisRepository: Repository<Pais>
 
   ) {}
 
   async create(createCiudadeDto: CreateCiudadeDto) {
     try {
-      const { paisId, ...ciudadDetails } = createCiudadeDto;
+      const ciudadDetails = createCiudadeDto;
 
-      const paisCiudad = await this.paisRepository.findOneBy({ id: paisId});
-
-      if( !paisCiudad )
-        throw new BadRequestException(`No existe ningun pais con el id ${paisId}`);
-      
-      const ciudad = this.ciudadRepository.create({
-        ...ciudadDetails,
-        pais: paisCiudad
-      });
+      const ciudad = this.ciudadRepository.create(ciudadDetails);
 
       await this.ciudadRepository.save( ciudad );
 
@@ -53,9 +41,6 @@ export class CiudadesService {
     const ciudades = await this.ciudadRepository.find({
       take: limit,
       skip: offset,
-      relations: {
-        pais: true
-      }
     });
 
     return ciudades;
@@ -67,8 +52,7 @@ export class CiudadesService {
 
   async findOne(id: number) {
     const ciudad = await this.ciudadRepository.findOne({
-      where: { id: id },
-      relations: ['pais']
+      where: { id: id }
     });
 
     if ( !ciudad ) 
@@ -79,19 +63,13 @@ export class CiudadesService {
 
   async update(id: number, updateCiudadeDto: UpdateCiudadeDto) {
 
-    const { paisId, ...ciudadDetails } = updateCiudadeDto;
+    const ciudadDetails = updateCiudadeDto;
 
     const ciudad = await this.findOne( id );
+    if( !ciudad )
+      throw new BadRequestException(`No existe ninguna ciudad con el id ${id}`);
 
-    const paisCiudad = await this.paisRepository.findOneBy({ id: paisId});
-
-    if( !paisCiudad )
-      throw new BadRequestException(`No existe ningun pais con el id ${paisId}`);
-
-    const dataModificada = {
-      ...ciudadDetails,
-      pais: paisCiudad
-    }
+    const dataModificada = ciudadDetails;
       
     await this.ciudadRepository.update(id = id, dataModificada);
     return await this.findOne( id );

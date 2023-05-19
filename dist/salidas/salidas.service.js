@@ -66,9 +66,7 @@ let SalidasService = class SalidasService {
             skip: offset,
             relations: {
                 tour: {
-                    ciudad: {
-                        pais: true
-                    }
+                    ciudad: true
                 },
                 guia: true,
                 idioma: true
@@ -82,7 +80,6 @@ let SalidasService = class SalidasService {
             relations: [
                 'tour',
                 'tour.ciudad',
-                'tour.ciudad.pais',
                 'guia',
                 'idioma'
             ]
@@ -97,7 +94,6 @@ let SalidasService = class SalidasService {
             relations: [
                 'tour',
                 'tour.ciudad',
-                'tour.ciudad.pais',
                 'guia',
                 'idioma'
             ]

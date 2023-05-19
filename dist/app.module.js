@@ -12,7 +12,6 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
-const paises_module_1 = require("./paises/paises.module");
 const ciudades_module_1 = require("./ciudades/ciudades.module");
 const idiomas_module_1 = require("./idiomas/idiomas.module");
 const tours_module_1 = require("./tours/tours.module");
@@ -37,7 +36,6 @@ AppModule = __decorate([
                 autoLoadEntities: true,
                 synchronize: true,
             }),
-            paises_module_1.PaisesModule,
             ciudades_module_1.CiudadesModule,
             idiomas_module_1.IdiomasModule,
             tours_module_1.ToursModule,

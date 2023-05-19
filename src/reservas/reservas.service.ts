@@ -75,9 +75,7 @@ export class ReservasService {
       relations: {
         salida: {
           tour: {
-            ciudad: {
-              pais: true
-            }
+            ciudad: true
           },
           guia: true,
           idioma: true

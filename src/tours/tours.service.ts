@@ -51,9 +51,7 @@ export class ToursService {
       take: limit,
       skip: offset,
       relations: {
-        ciudad: {
-          pais: true
-        }
+        ciudad: true
       }
     });
 
@@ -61,18 +59,17 @@ export class ToursService {
   }
 
   async findAllByCiudad(id: number) {
-    const salidas = await this.tourRepository.find({
+    const tours = await this.tourRepository.find({
       where: { ciudad: { id: id} },
       relations: [
         'ciudad',
-        'ciudad.pais'
       ]
     });
     
-    if ( !salidas || salidas.length === 0) 
-        throw new NotFoundException(`No se encontraron salidas para el guia con id ${ id }`);
+    if ( !tours || tours.length === 0) 
+        throw new NotFoundException(`No se encontraron tours para la ciudad con id ${ id }`);
 
-      return salidas;
+      return tours;
   }
 
   async findOne(id: number) {
@@ -80,7 +77,6 @@ export class ToursService {
       where: { id: id },
       relations: [
         'ciudad',
-        'ciudad.pais'
       ]
     });
 

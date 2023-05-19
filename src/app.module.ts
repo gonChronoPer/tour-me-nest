@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PaisesModule } from './paises/paises.module';
 import { CiudadesModule } from './ciudades/ciudades.module';
 import { IdiomasModule } from './idiomas/idiomas.module';
 import { ToursModule } from './tours/tours.module';
@@ -28,8 +27,6 @@ import { SalidasModule } from './salidas/salidas.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-
-    PaisesModule,
 
     CiudadesModule,
 
