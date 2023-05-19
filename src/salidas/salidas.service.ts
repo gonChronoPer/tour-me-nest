@@ -98,6 +98,23 @@ export class SalidasService {
       return salidas;
   }
 
+  async findAllByTour(id: number) {
+    const salidas = await this.salidaRepository.find({
+      where: { tour: { id: id} },
+      relations: [
+        'tour',
+        'tour.ciudad', 
+        'guia', 
+        'idioma'
+      ]
+    });
+    
+    if ( !salidas || salidas.length === 0) 
+        throw new NotFoundException(`No se encontraron salidas para el tour con id ${ id }`);
+
+      return salidas;
+  }
+
   async findOne(id: number) {
     const salida = await this.salidaRepository.findOne({
       where: { id: id },

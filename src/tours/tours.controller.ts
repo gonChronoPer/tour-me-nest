@@ -19,7 +19,7 @@ export class ToursController {
   }
 
   @Get('/ciudad/:id')
-  findAllByGuia(@Param('id') id: number) {
+  findAllByCiudad(@Param('id') id: number) {
     return this.toursService.findAllByCiudad(id);
   }
 
