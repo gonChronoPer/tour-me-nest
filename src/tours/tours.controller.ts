@@ -18,6 +18,11 @@ export class ToursController {
     return this.toursService.findAll(paginationDto);
   }
 
+  @Get('/ciudad/:id')
+  findAllByGuia(@Param('id') id: number) {
+    return this.toursService.findAllByCiudad(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.toursService.findOne(id);

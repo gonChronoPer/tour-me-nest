@@ -11,6 +11,7 @@ export declare class ToursService {
     constructor(tourRepository: Repository<Tour>, ciudadRepository: Repository<Ciudad>);
     create(createTourDto: CreateTourDto): Promise<Tour>;
     findAll(paginationDto: PaginationDto): Promise<Tour[]>;
+    findAllByCiudad(id: number): Promise<Tour[]>;
     findOne(id: number): Promise<Tour>;
     update(id: number, updateTourDto: UpdateTourDto): Promise<Tour>;
     remove(id: number): Promise<{

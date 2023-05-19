@@ -60,6 +60,21 @@ export class ToursService {
     return turistas;
   }
 
+  async findAllByCiudad(id: number) {
+    const salidas = await this.tourRepository.find({
+      where: { ciudad: { id: id} },
+      relations: [
+        'ciudad',
+        'ciudad.pais'
+      ]
+    });
+    
+    if ( !salidas || salidas.length === 0) 
+        throw new NotFoundException(`No se encontraron salidas para el guia con id ${ id }`);
+
+      return salidas;
+  }
+
   async findOne(id: number) {
     const tour = await this.tourRepository.findOne({
       where: { id: id },

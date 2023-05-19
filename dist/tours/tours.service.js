@@ -62,6 +62,18 @@ let ToursService = class ToursService {
         });
         return turistas;
     }
+    async findAllByCiudad(id) {
+        const salidas = await this.tourRepository.find({
+            where: { ciudad: { id: id } },
+            relations: [
+                'ciudad',
+                'ciudad.pais'
+            ]
+        });
+        if (!salidas || salidas.length === 0)
+            throw new common_1.NotFoundException(`No se encontraron salidas para el guia con id ${id}`);
+        return salidas;
+    }
     async findOne(id) {
         const tour = await this.tourRepository.findOne({
             where: { id: id },
