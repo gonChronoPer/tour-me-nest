@@ -17,7 +17,7 @@ export class Ciudad {
     nombre: string
 
     @Column({
-        type: 'varchar',
+        type: 'text',
         nullable: false
     })
     portadaPath: string;

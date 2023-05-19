@@ -51,7 +51,7 @@ __decorate([
 ], Tour.prototype, "precio", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: 'varchar',
+        type: 'text',
         nullable: true
     }),
     __metadata("design:type", String)

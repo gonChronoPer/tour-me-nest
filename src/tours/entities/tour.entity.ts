@@ -35,7 +35,7 @@ export class Tour {
     precio: number;
     
     @Column({
-        type: 'varchar',
+        type: 'text',
         nullable: true
     })
     portadaPath: string;

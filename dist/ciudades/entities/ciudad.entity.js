@@ -28,7 +28,7 @@ __decorate([
 ], Ciudad.prototype, "nombre", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: 'varchar',
+        type: 'text',
         nullable: false
     }),
     __metadata("design:type", String)
