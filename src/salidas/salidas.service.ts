@@ -109,10 +109,7 @@ export class SalidasService {
       ]
     });
     
-    if ( !salidas || salidas.length === 0) 
-        throw new NotFoundException(`No se encontraron salidas para el tour con id ${ id }`);
-
-      return salidas;
+    return salidas;
   }
 
   async findOne(id: number) {
