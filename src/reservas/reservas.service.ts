@@ -93,8 +93,7 @@ export class ReservasService {
       relations: [
         'salida', 
         'salida.tour', 
-        'salida.tour.ciudad',
-        'salida.tour.ciudad.pais', 
+        'salida.tour.ciudad', 
         'salida.guia',
         'salida.idioma',  
         'turista'
@@ -113,8 +112,7 @@ export class ReservasService {
       relations: [
         'salida', 
         'salida.tour', 
-        'salida.tour.ciudad',
-        'salida.tour.ciudad.pais', 
+        'salida.tour.ciudad', 
         'salida.guia',
         'salida.idioma',  
         'turista'

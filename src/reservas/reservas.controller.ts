@@ -3,7 +3,6 @@ import { ReservasService } from './reservas.service';
 import { CreateReservaDto } from './dto/create-reserva.dto';
 import { UpdateReservaDto } from './dto/update-reserva.dto';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
-import { CheckinReservaDto } from './dto/checkin-reserva.dto';
 
 @Controller('reservas')
 export class ReservasController {

@@ -88,7 +88,6 @@ let ReservasService = class ReservasService {
                 'salida',
                 'salida.tour',
                 'salida.tour.ciudad',
-                'salida.tour.ciudad.pais',
                 'salida.guia',
                 'salida.idioma',
                 'turista'
@@ -105,7 +104,6 @@ let ReservasService = class ReservasService {
                 'salida',
                 'salida.tour',
                 'salida.tour.ciudad',
-                'salida.tour.ciudad.pais',
                 'salida.guia',
                 'salida.idioma',
                 'turista'

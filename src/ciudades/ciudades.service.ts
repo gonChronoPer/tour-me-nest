@@ -44,10 +44,6 @@ export class CiudadesService {
     });
 
     return ciudades;
-    // return ciudades.map( ciudad => ({
-    //   ...ciudad,
-    //   pais: ciudad.pais.nombre
-    // }));
   }
 
   async findOne(id: number) {
