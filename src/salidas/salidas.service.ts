@@ -108,6 +108,9 @@ export class SalidasService {
         'idioma'
       ]
     });
+
+    if ( !salidas || salidas.length === 0) 
+        throw new NotFoundException(`No se encontraron salidas para el tour con id ${ id }`);
     
     return salidas;
   }

@@ -98,6 +98,8 @@ let SalidasService = class SalidasService {
                 'idioma'
             ]
         });
+        if (!salidas || salidas.length === 0)
+            throw new common_1.NotFoundException(`No se encontraron salidas para el tour con id ${id}`);
         return salidas;
     }
     async findOne(id) {
