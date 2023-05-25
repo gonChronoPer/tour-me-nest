@@ -151,13 +151,12 @@ export class ReservasService {
           'turista'
         ]
       });
-      console.log(reserva);
-
-      if ( salid != reserva.salida.id ) 
-        throw new BadRequestException(`La reserva no pertenece a esta salida.`);
 
       if ( !reserva ) 
         throw new BadRequestException(`Reserva con el codigo ${ cod } no encontrada`);
+
+      if ( salid != reserva.salida.id ) 
+        throw new BadRequestException(`La reserva no pertenece a esta salida.`);
 
       if( reserva.usada )
         throw new BadRequestException(`Ya se realizó el checkin de esta reserva.`)
