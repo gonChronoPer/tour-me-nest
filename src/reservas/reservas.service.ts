@@ -154,6 +154,9 @@ export class ReservasService {
         ],
       })
 
+      if( reserva == null )
+        throw new BadRequestException(`No existe el codigo de reserva indicado.`)
+
       if( reserva.usada )
         throw new BadRequestException(`Ya se realizó el checkin de esta reserva.`)
       
