@@ -142,36 +142,33 @@ export class ReservasService {
   }
 
   // TODO
-  async checkin(codigo: number) {
+  async checkin(cod: number, salid: number) {
     try {      
       const reserva = await this.reservaRepository.findOne({
-        where: {
-            codigo: codigo,
-        },
+        where: { codigo: cod },
         relations: [
-          'turista',
           'salida',
-        ],
-      })
+          'turista'
+        ]
+      });
+      console.log(reserva);
 
-      if( reserva == null )
-        throw new BadRequestException(`No existe el codigo de reserva indicado.`)
+      if ( salid != reserva.salida.id ) 
+        throw new BadRequestException(`La reserva no pertenece a esta salida.`);
+
+      if ( !reserva ) 
+        throw new BadRequestException(`Reserva con el codigo ${ cod } no encontrada`);
 
       if( reserva.usada )
         throw new BadRequestException(`Ya se realizó el checkin de esta reserva.`)
       
-      console.log(reserva);
-      reserva.salida.lugaresCheckInReady += reserva.lugaresReservados;
-      
+        reserva.salida.lugaresCheckInReady += reserva.lugaresReservados;
+
       await this.salidaRepository.update(reserva.salida.id, reserva.salida)
       
       reserva.usada = true;
       await this.reservaRepository.update( reserva.id, reserva );
       
-      return {
-        reserva: await this.findOne(reserva.id),
-        salida: await this.salidaRepository.findOneBy({id: reserva.salida.id})
-      };
   
     } catch (error) {
       this.handleDBExceptions(error);

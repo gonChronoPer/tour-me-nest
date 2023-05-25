@@ -10,10 +10,7 @@ export declare class ReservasController {
     findAllByTurista(id: number): Promise<import("./entities/reserva.entity").Reserva[]>;
     findOne(id: number): Promise<import("./entities/reserva.entity").Reserva>;
     update(id: number, updateReservaDto: UpdateReservaDto): string;
-    checkin(codigo: number): Promise<{
-        reserva: import("./entities/reserva.entity").Reserva;
-        salida: import("../salidas/entities/salida.entity").Salida;
-    }>;
+    checkin(codigo: number, salida: number): Promise<void>;
     remove(id: number): Promise<{
         msg: string;
     }>;

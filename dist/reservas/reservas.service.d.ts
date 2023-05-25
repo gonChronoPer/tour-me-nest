@@ -19,9 +19,6 @@ export declare class ReservasService {
     remove(id: number): Promise<{
         msg: string;
     }>;
-    checkin(codigo: number): Promise<{
-        reserva: Reserva;
-        salida: Salida;
-    }>;
+    checkin(cod: number, salid: number): Promise<void>;
     private handleDBExceptions;
 }

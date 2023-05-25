@@ -37,8 +37,8 @@ let ReservasController = class ReservasController {
     update(id, updateReservaDto) {
         return this.reservasService.update(id, updateReservaDto);
     }
-    checkin(codigo) {
-        return this.reservasService.checkin(codigo);
+    checkin(codigo, salida) {
+        return this.reservasService.checkin(codigo, salida);
     }
     remove(id) {
         return this.reservasService.remove(id);
@@ -81,10 +81,11 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ReservasController.prototype, "update", null);
 __decorate([
-    (0, common_1.Patch)('checkin/:id'),
+    (0, common_1.Patch)('checkin/:codigo/:salida'),
     __param(0, (0, common_1.Param)('codigo')),
+    __param(1, (0, common_1.Param)('salida')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", void 0)
 ], ReservasController.prototype, "checkin", null);
 __decorate([

@@ -33,9 +33,9 @@ export class ReservasController {
     return this.reservasService.update(id, updateReservaDto);
   }
 
-  @Patch('checkin/:id')
-  checkin(@Param('codigo') codigo: number) {
-    return this.reservasService.checkin(codigo);
+  @Patch('checkin/:codigo/:salida')
+  checkin(@Param('codigo') codigo: number, @Param('salida') salida: number ) {
+    return this.reservasService.checkin(codigo, salida);
   }
 
   @Delete(':id')
