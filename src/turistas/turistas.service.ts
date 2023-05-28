@@ -50,6 +50,15 @@ export class TuristasService {
     return turista;
   }
 
+  async findOneByMail(mail: string) {
+    const guia = await this.turistaRepository.findOneBy({ email: mail });
+
+    if ( !guia ) 
+      throw new NotFoundException(`Turista con mail ${ mail } no encontrado`);
+
+    return guia;
+  }
+
   async update(id: number, updateTuristaDto: UpdateTuristaDto) {
     await this.turistaRepository.update(id = id, updateTuristaDto);
     return await this.findOne( id );

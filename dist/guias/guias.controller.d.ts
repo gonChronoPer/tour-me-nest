@@ -8,6 +8,7 @@ export declare class GuiasController {
     create(createGuiaDto: CreateGuiaDto): Promise<import("./entities/guia.entity").Guia>;
     findAll(paginationDto: PaginationDto): Promise<import("./entities/guia.entity").Guia[]>;
     findOne(id: number): Promise<import("./entities/guia.entity").Guia>;
+    findOneByMail(mail: string): Promise<import("./entities/guia.entity").Guia>;
     update(id: number, updateGuiaDto: UpdateGuiaDto): Promise<import("./entities/guia.entity").Guia>;
     remove(id: number): Promise<{
         msg: string;

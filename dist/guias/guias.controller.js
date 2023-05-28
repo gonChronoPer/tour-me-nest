@@ -31,6 +31,9 @@ let GuiasController = class GuiasController {
     findOne(id) {
         return this.guiasService.findOne(id);
     }
+    findOneByMail(mail) {
+        return this.guiasService.findOneByMail(mail);
+    }
     update(id, updateGuiaDto) {
         return this.guiasService.update(id, updateGuiaDto);
     }
@@ -59,6 +62,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], GuiasController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Get)('/:mail'),
+    __param(0, (0, common_1.Param)('mail')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], GuiasController.prototype, "findOneByMail", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),

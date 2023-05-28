@@ -23,6 +23,11 @@ export class TuristasController {
     return this.turistasService.findOne(id);
   }
 
+  @Get('/:mail')
+  findOneByMail(@Param('mail') mail: string) {
+    return this.turistasService.findOneByMail(mail);
+  }
+
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateTuristaDto: UpdateTuristaDto) {
     return this.turistasService.update(id, updateTuristaDto);

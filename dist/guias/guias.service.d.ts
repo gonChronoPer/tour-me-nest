@@ -10,6 +10,7 @@ export declare class GuiasService {
     create(createGuiaDto: CreateGuiaDto): Promise<Guia>;
     findAll(paginationDto: PaginationDto): Promise<Guia[]>;
     findOne(id: number): Promise<Guia>;
+    findOneByMail(mail: string): Promise<Guia>;
     update(id: number, updateGuiaDto: UpdateGuiaDto): Promise<Guia>;
     remove(id: number): Promise<{
         msg: string;

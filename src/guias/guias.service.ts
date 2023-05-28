@@ -55,7 +55,7 @@ export class GuiasService {
     const guia = await this.guiaRepository.findOneBy({ email: mail });
 
     if ( !guia ) 
-      throw new NotFoundException(`Guia con id ${ mail } no encontrada`);
+      throw new NotFoundException(`Guia con mail ${ mail } no encontrado`);
 
     return guia;
   }
