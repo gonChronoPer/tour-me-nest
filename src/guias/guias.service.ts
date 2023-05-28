@@ -50,6 +50,16 @@ export class GuiasService {
     return guia;
   }
 
+
+  async findOneByMail(mail: string) {
+    const guia = await this.guiaRepository.findOneBy({ email: mail });
+
+    if ( !guia ) 
+      throw new NotFoundException(`Guia con id ${ mail } no encontrada`);
+
+    return guia;
+  }
+
   async update(id: number, updateGuiaDto: UpdateGuiaDto) {
     await this.guiaRepository.update(id = id, updateGuiaDto);
     return await this.findOne( id );

@@ -23,6 +23,11 @@ export class GuiasController {
     return this.guiasService.findOne(id);
   }
 
+  @Get('/:mail')
+  findOneByMail(@Param('mail') mail: string) {
+    return this.guiasService.findOneByMail(mail);
+  }
+
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateGuiaDto: UpdateGuiaDto) {
     return this.guiasService.update(id, updateGuiaDto);
