@@ -10,6 +10,7 @@ export declare class TuristasService {
     create(createTuristaDto: CreateTuristaDto): Promise<Turista>;
     findAll(paginationDto: PaginationDto): Promise<Turista[]>;
     findOne(id: number): Promise<Turista>;
+    findOneByMail(mail: string): Promise<Turista>;
     update(id: number, updateTuristaDto: UpdateTuristaDto): Promise<Turista>;
     remove(id: number): Promise<{
         msg: string;

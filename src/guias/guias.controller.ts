@@ -23,7 +23,7 @@ export class GuiasController {
     return this.guiasService.findOne(id);
   }
 
-  @Get('/:mail')
+  @Get('/mail/:mail')
   findOneByMail(@Param('mail') mail: string) {
     return this.guiasService.findOneByMail(mail);
   }

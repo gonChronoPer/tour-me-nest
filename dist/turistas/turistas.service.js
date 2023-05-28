@@ -58,6 +58,12 @@ let TuristasService = class TuristasService {
             throw new common_1.NotFoundException(`Turista con id ${id} no encontrado`);
         return turista;
     }
+    async findOneByMail(mail) {
+        const guia = await this.turistaRepository.findOneBy({ email: mail });
+        if (!guia)
+            throw new common_1.NotFoundException(`Turista con mail ${mail} no encontrado`);
+        return guia;
+    }
     async update(id, updateTuristaDto) {
         await this.turistaRepository.update(id = id, updateTuristaDto);
         return await this.findOne(id);

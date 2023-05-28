@@ -23,7 +23,7 @@ export class TuristasController {
     return this.turistasService.findOne(id);
   }
 
-  @Get('/:mail')
+  @Get('/mail/:mail')
   findOneByMail(@Param('mail') mail: string) {
     return this.turistasService.findOneByMail(mail);
   }

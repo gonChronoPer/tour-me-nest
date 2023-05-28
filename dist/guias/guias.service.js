@@ -61,7 +61,7 @@ let GuiasService = class GuiasService {
     async findOneByMail(mail) {
         const guia = await this.guiaRepository.findOneBy({ email: mail });
         if (!guia)
-            throw new common_1.NotFoundException(`Guia con mail ${mail} no encontrada`);
+            throw new common_1.NotFoundException(`Guia con mail ${mail} no encontrado`);
         return guia;
     }
     async update(id, updateGuiaDto) {

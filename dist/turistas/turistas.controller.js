@@ -31,6 +31,9 @@ let TuristasController = class TuristasController {
     findOne(id) {
         return this.turistasService.findOne(id);
     }
+    findOneByMail(mail) {
+        return this.turistasService.findOneByMail(mail);
+    }
     update(id, updateTuristaDto) {
         return this.turistasService.update(id, updateTuristaDto);
     }
@@ -59,6 +62,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], TuristasController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Get)('/:mail'),
+    __param(0, (0, common_1.Param)('mail')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], TuristasController.prototype, "findOneByMail", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
