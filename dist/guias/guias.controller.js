@@ -63,7 +63,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], GuiasController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Get)('/:mail'),
+    (0, common_1.Get)('/mail/:mail'),
     __param(0, (0, common_1.Param)('mail')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
