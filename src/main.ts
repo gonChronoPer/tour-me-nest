@@ -8,7 +8,7 @@ async function bootstrap() {
 
   const corsOptions: CorsOptions = {
     origin: 'http://localhost:4200', // Reemplaza esto con la URL de tu frontend
-    optionsSuccessStatus: 200,
+    optionsSuccessStatus: null,
   };
 
   app.setGlobalPrefix('api');
